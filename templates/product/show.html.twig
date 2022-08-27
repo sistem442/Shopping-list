@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produkt Liste{% endblock %}
+
+{% block body %}
+<style>
+    table{
+        border: 1px solid;
+        padding: 10px;
+    }
+    th,td {
+    border: 1px solid black;
+    width: 100px;
+    overflow: hidden;
+    }   
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <table>
+        <tr>
+            <td> Name </td>
+            <td> description </td>
+            <td> price</td>
+        </tr>
+    {% for product in products %}
+        <tr>
+            <td class="field"> {{product.name}} </td>
+            <td class="field"> {{product.description}} </td>
+            <td class="field"> {{ product.price}} </td>
+            <td class="field"><a href="{{ path('product_edit', {id: product.id}) }}">edit</a></td>
+            <td class="field"><a href="{{ path('product_delete', {id: product.id}) }}">delete</a></td>
+        </tr>   
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

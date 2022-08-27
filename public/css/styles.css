@@ -1,0 +1,15 @@
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+  .col{
+    padding:10px;
+  }
+
+  
+
+  .field{
+    background-color: aqua;
+  }
