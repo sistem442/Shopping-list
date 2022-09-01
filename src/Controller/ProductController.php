@@ -68,9 +68,9 @@ class ProductController extends AbstractController
     #[Route('/products', name: 'products')]
     public function findAllGreaterThanPrice(ManagerRegistry $doctrine): Response
     {
-        $minPrice = 1000;
+        $minPrice = 0;
         $products = $doctrine->getRepository(Product::class)->findAllGreaterThanPrice($minPrice);
-        return $this->render('product/show.html.twig', ['products' => $products]);
+        return $this->render('product/products.html.twig', ['products' => $products]);
     }
 
 
