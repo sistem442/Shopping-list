@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function Symfony\Component\String\u;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -55,6 +57,16 @@ class ProductRepository extends ServiceEntityRepository
 
         // returns an array of Product objects
         return $query->getResult();
+    }
+
+    public function findAll(int $page = 1): Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.id > 0')
+            ->orderBy('p.id', 'DESC')
+        ;
+
+        return (new Paginator($qb))->paginate($page);
     }
 
 //    /**

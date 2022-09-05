@@ -73,6 +73,19 @@ class ProductController extends AbstractController
         return $this->render('product/products.html.twig', ['products' => $products]);
     }
 
+    #[Route('/products2', name: 'products2')]
+    #[Route('/page/{page<[1-9]\d*>}', defaults: ['_format' => 'html'], methods: ['GET'], name: 'blog_index_paginated')]
+    public function findAll(ManagerRegistry $doctrine, int $page,): Response
+    {
+        $minPrice = 0;
+        $products = $doctrine->getRepository(Product::class)->findAll($page);
+        //return $this->render('product/products.html.twig', ['products' => $products]);
+
+        return $this->render('product/products.html.twig', [
+            'paginator' => $products
+        ]);
+    }
+
 
     #[Route('/product/{id}', name: 'product_show')]
     public function show(ManagerRegistry $doctrine, int $id): Response
