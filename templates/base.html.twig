@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #} <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet"
-                href=
-        "https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+            <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
             <style>
-                .pure-menu-heading {
-                    color: #308d46;
-                }
-        
                 .custom-display {
                     /* To limit the menu width to
                     the content of the menu: */
@@ -24,10 +18,10 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         <div class="row">
@@ -39,7 +33,7 @@
                                 <a href="/product/add" class="pure-menu-link">Add a product</a>
                             </li>
                             <li class="pure-menu-item">
-                                <a href="/products" class="pure-menu-link">Show all products</a>
+                                <a href="/products/page/1" class="pure-menu-link">Show all products</a>
                             </li>            
                         </ul>
                     </div>

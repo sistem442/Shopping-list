@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,10 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\Type\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use App\Entity\Comment;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProductController extends AbstractController
 {
@@ -58,23 +53,14 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('products');
+            return $this->redirectToRoute('products_paginated',['page'=>1]);
         }
         return $this->renderForm('product/new.html.twig', [
             'form' => $form,
         ]);
     }
 
-    #[Route('/products', name: 'products')]
-    public function findAllGreaterThanPrice(ManagerRegistry $doctrine): Response
-    {
-        $minPrice = 0;
-        $products = $doctrine->getRepository(Product::class)->findAllGreaterThanPrice($minPrice);
-        return $this->render('product/products.html.twig', ['products' => $products]);
-    }
-
-    #[Route('/products2', name: 'products2')]
-    #[Route('/page/{page<[1-9]\d*>}', defaults: ['_format' => 'html'], methods: ['GET'], name: 'blog_index_paginated')]
+    #[Route('/products/page/{page<[1-9]\d*>}', defaults: ['_format' => 'html'], methods: ['GET'], name: 'products_paginated')]
     public function findAll(ManagerRegistry $doctrine, int $page,): Response
     {
         $minPrice = 0;
@@ -123,22 +109,13 @@ class ProductController extends AbstractController
                 $entityManager->persist($product);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('products');
+                return $this->redirectToRoute('products_paginated',['page'=>1]);
             }
     
             return $this->renderForm('product/new.html.twig', [
                 'form' => $form,
             ]);
-
-
-
-
-        $product->setName('New product name!');
-        $entityManager->flush();
-
-        return $this->redirectToRoute('product_show', [
-            'id' => $product->getId()
-        ]);
+        //TODO add here else with error messages for form
     }
     #[Route('/product/delete/{id}', name: 'product_delete')]
     public function deleteProduct(ManagerRegistry $doctrine, Request $request, EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager,int $id): Response
@@ -155,6 +132,7 @@ class ProductController extends AbstractController
         $entityManager->flush();
 
         $products = $doctrine->getRepository(Product::class)->findAll();
-        return $this->render('product/show.html.twig', ['products' => $products]);
+        //return $this->render('product/show.html.twig', ['products' => $products]);
+        return $this->redirectToRoute('products_paginated',['page'=>1]);
     }
 }

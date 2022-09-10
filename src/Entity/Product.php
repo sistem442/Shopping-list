@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     protected $task;
-    protected $date;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,6 +24,9 @@ class Product
 
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private \DateTime $date;
 
     public function getId(): ?int
     {
