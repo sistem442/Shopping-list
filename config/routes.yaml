@@ -1,9 +1,12 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
-# config/routes.yaml
+homepage:
+  path: /{_locale}
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    template: lucky/number.html.twig
+    _locale: '%locale%'
 
-# the "app_lucky_number" route name is not important yet
-#app_lucky_number:
-#    path: /lucky/number
-#    controller: App\Controller\LuckyController::number
+controllers:
+  resource: ../src/Controller/
+  type: attribute

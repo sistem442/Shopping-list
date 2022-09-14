@@ -4,49 +4,68 @@
 
 {% block body %}
 <style>
-    table{
+    table {
         border: 1px solid;
         padding: 10px;
     }
-    th,td {
+
+    th, td {
         border: 1px solid black;
         width: 100px;
         overflow: hidden;
-        padding:10px;
-    }   
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { padding: 2px 6px; }
-    .field{
+        padding: 10px;
+    }
+
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        padding: 2px 6px;
+    }
+
+    .field {
         background-color: rgb(60, 61, 61);
     }
 </style>
 
-<div class="example-wrapper">
-    <table>
-        <tr>
-            <td> Name </td>
-            <td> description </td>
-            <td> price</td>
-        </tr>
-    {% for product in paginator.results %}
-        <tr>
-            <td class="field"> {{product.name}} </td>
-            <td class="field"> {{product.description}} </td>
-            <td class="field"> {{ product.price}} </td>
-            <td class="field"><a href="{{ path('product_edit', {id: product.id}) }}">edit</a></td>
-            <td class="field"><a href="{{ path('product_delete', {id: product.id}) }}">delete</a></td>
-        </tr>   
-    {% endfor %}
-    {% if paginator.hasToPaginate %}
-        <tr>
-            <td colspan="5">
-            <div class="navigation text-center">
-                <ul class="pagination">
-                    {% if paginator.hasPreviousPage %}
-                        <li class="prev"><a href="{{ path('products_paginated', {page: paginator.previousPage}) }}" rel="previous"><i class="fa fw fa-long-arrow-left"></i> {{ 'paginator.previous'|trans }}</a></li>
-                    {% else %}
-                        <li class="prev disabled"><span><i class="fa fw fa-arrow-left"></i> {{ 'paginator.previous'|trans }}</span></li>
-                    {% endif %}
+    <div class="example-wrapper">
+        <table>
+            <tr>
+                <td> {{ 'product.name'|trans }} </td>
+                <td> {{ 'product.description'|trans }} </td>
+                <td> {{ 'product.price'|trans }} </td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for product in paginator.results %}
+                <tr>
+                    <td class="field"> {{ product.name }} </td>
+                    <td class="field"> {{ product.description }} </td>
+                    <td class="field"> {{ product.price }} </td>
+                    <td class="field"><a href="{{ path('product_edit', {id: product.id}) }}">edit</a></td>
+                    <td class="field"><a href="{{ path('product_delete', {id: product.id}) }}">delete</a></td>
+                </tr>
+            {% endfor %}
+            {% if paginator.hasToPaginate %}
+                <tr>
+                    <td colspan="5">
+                        <div class="navigation text-center">
+                            <ul class="pagination">
+                                {% if paginator.hasPreviousPage %}
+                                    <li class="prev"><a
+                                                href="{{ path('products_paginated', {page: paginator.previousPage}) }}"
+                                                rel="previous"><i
+                                                    class="fa fw fa-long-arrow-left"></i> {{ 'paginator.previous'|trans }}
+                                        </a></li>
+                                {% else %}
+                                    <li class="prev disabled"><span><i
+                                                    class="fa fw fa-arrow-left"></i> {{ 'paginator.previous'|trans }}</span>
+                                    </li>
+                                {% endif %}
 
                     {% for i in 1..paginator.lastPage %}
                         {% if i == paginator.currentPage %}

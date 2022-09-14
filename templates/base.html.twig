@@ -1,46 +1,69 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #} <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-            <style>
-                .custom-display {
-                    /* To limit the menu width to
-                    the content of the menu: */
-                    display: inline-block;
-                }
-            </style>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="row">
-            {% block menu %}
-                <div  class="col-3">
-                    <div class=" pure-menu custom-display">
-                        <ul class="pure-menu-list">
-                            <li class="pure-menu-item">
-                                <a href="/product/add" class="pure-menu-link">Add a product</a>
-                            </li>
-                            <li class="pure-menu-item">
-                                <a href="/products/page/1" class="pure-menu-link">Show all products</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            {% endblock %}
-            <div class="col-9">
-                {% block body %}{% endblock %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"/>
+    <link rel="stylesheet" href="../public/css/styles.css">
+    <style> .custom-display {
+            display: inline-block;
+        } </style>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<div class="row2 navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="locales">
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <span class="caret"></span>
+                <span class="sr-only">{{ 'menu.choose_language'|trans }}</span>
+            </a>
+            <ul class="dropdown-menu locales" role="menu" aria-labelledby="locales">
+                {% for locale in locales() %}
+                    <li {% if app.request.locale == locale.code %}aria-checked="true" class="active"
+                        {% else %}aria-checked="false"
+                            {% endif %}
+                        role="menuitem">
+                        <a href="{{ path(app.request.get('_route', 'products_paginated'), app.request.get('_route_params', [])|merge({_locale: locale.code})) }}">
+                            {{ locale.name|capitalize }} <small>{{ locale.code[0:2] }}</small>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="row2">
+
+    {% block menu %}
+        <div class="col-3">
+            <div class=" pure-menu custom-display">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="/{{ app.request.locale }}/product/add"
+                           class="pure-menu-link">{{ 'product.add'|trans }}</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href="/{{ app.request.locale }}/products/page/1"
+                           class="pure-menu-link">{{ 'product.all'|trans }}</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </body>
+    {% endblock %}
+    <div class="col-9">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+</body>
 </html>
