@@ -16,25 +16,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('/{_locale}/product', name: 'create_product')]
-    public function createProduct(ManagerRegistry $doctrine): Response
-    {
-        $entityManager = $doctrine->getManager();
-
-        $product = new Product();
-        $product->setName('Milch');
-        //$product->setPrice(1999);
-        $product->setDescription('1l');
-
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($product);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new product with id ' . $product->getId());
-    }
-
     #[Route('/{_locale}/product/add', name: 'create_product')]
     public function new(Request $request, EventDispatcherInterface $eventDispatcher, EntityManagerInterface $entityManager): Response
     {

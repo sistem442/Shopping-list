@@ -25,16 +25,16 @@
         "ext-tokenizer": "*",
         "php": "^7.1 || ^8.0",
         "psr/cache": "^1 || ^2 || ^3"
-            },
-            "require-dev": {
-                "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/coding-standard": "^6.0 || ^8.1",
-                "phpstan/phpstan": "^1.4.10 || ^1.8.0",
-                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.1.5",
-                "symfony/cache": "^4.4 || ^5.2",
-                "vimeo/psalm": "^4.10"
-            },
-            "type": "library",
+      },
+      "require-dev": {
+        "doctrine/cache": "^1.11 || ^2.0",
+        "doctrine/coding-standard": "^6.0 || ^8.1",
+        "phpstan/phpstan": "^1.4.10 || ^1.8.0",
+        "phpunit/phpunit": "^7.5 || ^8.0 || ^9.1.5",
+        "symfony/cache": "^4.4 || ^5.2",
+        "vimeo/psalm": "^4.10"
+      },
+      "type": "library",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
@@ -3347,14 +3347,14 @@
                 "source": "https://github.com/symfony/http-foundation/tree/v6.1.3"
             },
             "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                  "url": "https://github.com/fabpot",
-                  "type": "github"
-                },
+              {
+                "url": "https://symfony.com/sponsor",
+                "type": "custom"
+              },
+              {
+                "url": "https://github.com/fabpot",
+                "type": "github"
+              },
               {
                 "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                 "type": "tidelift"
@@ -3386,16 +3386,16 @@
       },
       "conflict": {
         "symfony/browser-kit": "<5.4",
-                "symfony/cache": "<5.4",
-                "symfony/config": "<6.1",
-                "symfony/console": "<5.4",
-                "symfony/dependency-injection": "<6.1",
-                "symfony/doctrine-bridge": "<5.4",
-                "symfony/form": "<5.4",
-                "symfony/http-client": "<5.4",
-                "symfony/mailer": "<5.4",
-                "symfony/messenger": "<5.4",
-                "symfony/translation": "<5.4",
+        "symfony/cache": "<5.4",
+        "symfony/config": "<6.1",
+        "symfony/console": "<5.4",
+        "symfony/dependency-injection": "<6.1",
+        "symfony/doctrine-bridge": "<5.4",
+        "symfony/form": "<5.4",
+        "symfony/http-client": "<5.4",
+        "symfony/mailer": "<5.4",
+        "symfony/messenger": "<5.4",
+        "symfony/translation": "<5.4",
                 "symfony/twig-bridge": "<5.4",
                 "symfony/validator": "<5.4",
                 "twig/twig": "<2.13"
@@ -3431,16 +3431,16 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Component\\HttpKernel\\": ""
+                  "Symfony\\Component\\HttpKernel\\": ""
                 },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
+              "exclude-from-classmap": [
+                "/Tests/"
+              ]
             },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
       "authors": [
         {
           "name": "Fabien Potencier",
@@ -3555,16 +3555,16 @@
     {
       "name": "symfony/monolog-bridge",
       "version": "v6.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/monolog-bridge.git",
-                "reference": "1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627",
-                "reference": "1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627",
-                "shasum": ""
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/monolog-bridge.git",
+        "reference": "1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627",
+        "reference": "1efd6a42b1dc80e03bd74d4a2fdc85e728dc2627",
+        "shasum": ""
             },
             "require": {
                 "monolog/monolog": "^1.25.1|^2|^3",
@@ -5282,16 +5282,16 @@
         "symfony/translation-implementation": ""
       },
       "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "3.1-dev"
-                },
-                "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
-                }
-            },
-            "autoload": {
+      "extra": {
+        "branch-alias": {
+          "dev-main": "3.1-dev"
+        },
+        "thanks": {
+          "name": "symfony/contracts",
+          "url": "https://github.com/symfony/contracts"
+        }
+      },
+      "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Translation\\": ""
                 },
@@ -6186,16 +6186,16 @@
       },
       "require-dev": {
         "psr/container": "^1.0",
-                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
+        "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
+      },
+      "type": "library",
+      "extra": {
+        "branch-alias": {
+          "dev-master": "3.4-dev"
+        }
+      },
+      "autoload": {
+        "psr-4": {
                     "Twig\\": "src/"
                 }
             },
@@ -8961,5 +8961,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-  "plugin-api-version": "2.3.0"
+  "plugin-api-version": "2.2.0"
 }
