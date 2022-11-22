@@ -6,14 +6,12 @@ use App\Entity\Product;
 use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use function Symfony\Component\String\u;
 
 /**
  * @extends ServiceEntityRepository<Product>
  *
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)
- * @method Product[]    findAll()
  * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ProductRepository extends ServiceEntityRepository
@@ -40,25 +38,10 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    
+
     /**
      * @return Product[]
      */
-    public function findAllGreaterThanPrice(int $price): array
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT p
-            FROM App\Entity\Product p
-            WHERE p.price > :price
-            ORDER BY p.price ASC'
-        )->setParameter('price', $price);
-
-        // returns an array of Product objects
-        return $query->getResult();
-    }
-
     public function findAll(int $page = 1): Paginator
     {
         $qb = $this->createQueryBuilder('p')

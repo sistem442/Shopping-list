@@ -20,12 +20,12 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
-     * This test changes the database contents by creating a new comment. However,
+     * This test changes the database contents by creating a new product. However,
      * thanks to the DAMADoctrineTestBundle and its PHPUnit listener, all changes
      * to the database are rolled back when this test completes. This means that
      * all the application tests begin with the same database contents.
      */
-    public function testNewProduct(): void
+    public function testEditProduct(): void
     {
         $client = static::createClient([], [
             'PHP_AUTH_USER' => 'john_user',
@@ -42,8 +42,30 @@ class ProductControllerTest extends WebTestCase
             'product[name]' => 'Acme',
         ]);
 
-        $newComment = $crawler->filter('.product')->first()->filter('td.field')->text();
+        $newName = $crawler->filter('.product')->first()->filter('td.field')->text();
 
-        $this->assertSame('Acme', $newComment);
+        $this->assertSame('Acme', $newName);
+    }
+
+    public function testNewProduct(): void
+    {
+        $client = static::createClient([], [
+            'PHP_AUTH_USER' => 'john_user',
+            'PHP_AUTH_PW' => 'kitten',
+        ]);
+        $client->followRedirects();
+
+        // Find first blog post
+        $crawler = $client->request('GET', '/en/products/page/1');
+        $newProductLink = $crawler->filter('ul.pure-menu-list > li.pure-menu-item a')->link();
+
+        $client->click($newProductLink);
+        $crawler = $client->submitForm('product_save', [
+            'product[name]' => 'Acme',
+        ]);
+
+        $newName = $crawler->filter('.product')->first()->filter('td.field')->text();
+
+        $this->assertSame('Acme', $newName);
     }
 }
